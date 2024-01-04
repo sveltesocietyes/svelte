@@ -34,8 +34,8 @@
 		</div>
 
 		<div class="donors blurb">
-			<h3>donors</h3>
-			<p><a href="https://opencollective.com/svelte">Support us on OpenCollective</a></p>
+			<h3>donantes</h3>
+			<p><a href="https://opencollective.com/svelte">Apóyanos en OpenCollective</a></p>
 		</div>
 
 		<div class="donors grid">

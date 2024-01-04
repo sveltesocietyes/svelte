@@ -63,9 +63,9 @@
 
 <Footer
 	links={{
-		resources: [
+		recursos: [
 			{
-				title: 'documentation',
+				title: 'documentación',
 				href: '/docs'
 			},
 			{
@@ -73,7 +73,7 @@
 				href: '/tutorial'
 			},
 			{
-				title: 'examples',
+				title: 'ejemplos',
 				href: '/examples'
 			},
 			{
@@ -81,7 +81,7 @@
 				href: '/blog'
 			}
 		],
-		connect: [
+		conecta: [
 			{
 				title: 'github',
 				href: 'https://github.com/sveltejs/svelte'
@@ -102,8 +102,7 @@
 	}}
 >
 	<span slot="license">
-		Svelte is <a href="https://github.com/sveltejs/svelte">free and open source software</a> released
-		under the MIT license
+		Svelte es un <a href="https://github.com/sveltejs/svelte">software gratuito y de código abierto</a> liberado bajo licencia MIT
 	</span>
 </Footer>
 

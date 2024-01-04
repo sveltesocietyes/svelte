@@ -1,7 +1,7 @@
 ---
-title: Introduction
+title: Introducción
 ---
 
-Welcome to the Svelte 5 preview documentation! This is intended as a resource for people who already have some familiarity with Svelte and want to learn about the new <em>runes</em> API, which you can learn about in the [Introducing runes](https://svelte.dev/blog/runes) blog post.
+¡Bienvenido a la documentación preliminar de Svelte 5! Esto está pensado como un recurso para personas que ya tienen cierta familiaridad con Svelte y desean aprender sobre la nueva API de <em>runas</em>, sobre la cual puedes informarte en la publicación del blog [Introducción a las runas](https://svelte-es.dev/blog/runes).
 
-You can try runes for yourself in the [playground](/), or learn more about our plans via the [FAQ](/docs/faq).
+Puedes probar runas por ti mismo en el [playground](/), o aprender más sobre nuestros planes a través de las [Preguntas Frecuentes (FAQ)](/docs/faq).

@@ -1,14 +1,14 @@
 ---
-title: Runes
+title: Runas
 ---
 
-Svelte 5 introduces _runes_, a powerful set of primitives for controlling reactivity inside your Svelte components and — for the first time — inside `.svelte.js` and `.svelte.ts` modules.
+Svelte 5 introduce _runes_, un poderoso conjunto de primitivas para controlar la reactividad dentro de tus componentes Svelte y — por primera vez — dentro de módulos `.svelte.js` y `.svelte.ts`.
 
-Runes are function-like symbols that provide instructions to the Svelte compiler. You don't need to import them from anywhere — when you use Svelte, they're part of the language.
+Las runas son símbolos similares a funciones que proporcionan instrucciones al compilador de Svelte. No necesitas importarlas de ningún lugar — cuando usas Svelte, son parte del lenguaje.
 
-When you [opt in to runes mode](#how-to-opt-in), the non-runes features listed in the 'What this replaces' sections are no longer available.
+Cuando [optas por el modo runas](#how-to-opt-in), las características no-runas enumeradas en las secciones 'Lo que esto reemplaza' ya no están disponibles.
 
-> Check out the [Introducing runes](https://svelte.dev/blog/runes) blog post before diving into the docs!
+> ¡Revisa la publicación del blog [Introducción a las runas](https://svelte-es.dev/blog/runes) antes de sumergirte en los documentos!
 
 ## `$state`
 

@@ -43,7 +43,16 @@
 	</div>
 </Blurb>
 
-<TrySection />
+<TrySection>
+	<svelte:fragment slot="content-heading">Mira por ti mismo</svelte:fragment>
+	<svelte:fragment slot="content">
+		Prueba en local, 
+		<a target="_blank" rel="noreferrer" href="https://sveltekit.new"> 
+			en StackBlitz
+		</a>, o con el 
+		<a target="_blank" href={PUBLIC_LEARN_SITE_URL}> tutorial interactivo</a>.
+	</svelte:fragment>
+</TrySection>
 
 <Demo />
 

@@ -5,26 +5,26 @@
 	const examples = [
 		{
 			id: 'hello-world',
-			title: 'Hello World',
-			description: 'Svelte components are built on top of HTML. Just add data.'
+			title: 'Hola mundo',
+			description: 'Los componentes de Svelte se construyen sobre HTML. Solo agrega datos.'
 		},
 		{
 			id: 'nested-components',
-			title: 'Scoped CSS',
+			title: 'Ámbito CSS',
 			description:
-				'CSS is component-scoped by default — no more style collisions or specificity wars. Or you can <a href="/blog/svelte-css-in-js">use your favourite CSS-in-JS library</a >.'
+				'CSS tiene un ámbito de componente de forma predeterminada — no mas colisiones de estilos o guerras de especifidad. O puedes <a href="/blog/svelte-css-in-js">usar tu librería CSS-in-JS favorita</a >.'
 		},
 		{
 			id: 'reactive-assignments',
-			title: 'Reactivity',
+			title: 'Reactividad',
 			description:
-				'Trigger efficient, granular updates by assigning to local variables. The compiler does the rest.'
+				'Activa actualizaciones eficientes y granulares asignando a variables locales.El compilador hará el resto.'
 		},
 		{
 			id: 'svg-transitions',
-			title: 'Transitions',
+			title: 'Transiciones',
 			description:
-				'Build beautiful UIs with a powerful, performant transition engine built right into the framework.'
+				'Construye hermosas UIs, con un potente y eficiente motor de transición integrado en el framework.'
 		}
 	];
 
@@ -32,7 +32,7 @@
 </script>
 
 <Section --background="var(--sk-back-2)">
-	<h3>build with ease</h3>
+	<h3>crea con facilidad</h3>
 
 	<div class="container">
 		<div class="controls">
@@ -49,7 +49,7 @@
 				{/each}
 			</div>
 
-			<a href="/examples">more <span class="large-show">&nbsp;examples</span> &rarr;</a>
+			<a href="/examples">más <span class="large-show">&nbsp;ejemplos</span> &rarr;</a>
 		</div>
 
 		{#if selected}

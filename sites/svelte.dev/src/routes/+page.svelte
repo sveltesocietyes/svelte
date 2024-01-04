@@ -50,7 +50,8 @@
 		<a target="_blank" rel="noreferrer" href="https://sveltekit.new"> 
 			en StackBlitz
 		</a>, o con el 
-		<a target="_blank" href={PUBLIC_LEARN_SITE_URL}> tutorial interactivo</a>.
+		<!-- Reemplazar href a continuación por url del tutorial traducido -->
+		<a target="_blank" href="https://learn.svelte.dev"> tutorial interactivo</a>.
 	</svelte:fragment>
 </TrySection>
 

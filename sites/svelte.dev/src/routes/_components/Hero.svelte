@@ -13,13 +13,13 @@
 	<div class="hero-content">
 		<img alt="Svelte logotype" class="logotype" src={SvelteLogotype} width="300" height="56" />
 		<strong>
-			<span style="white-space: nowrap">Cybernetically enhanced</span> <br /> web apps
+			<span style="white-space: nowrap">Aplicaciones web</span> <br /> cibernéticamente mejoradas
 		</strong>
 		<div class="buttons">
 			<a href="https://learn.svelte.dev" rel="external" class="cta">
 				tutorial<Icon name="external-link" size="1em" />
 			</a>
-			<a href="/docs/introduction" class="cta basic">read the docs</a>
+			<a href="/docs/introduction" class="cta basic">lee la documentación</a>
 		</div>
 	</div>
 

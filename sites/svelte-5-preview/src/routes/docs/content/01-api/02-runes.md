@@ -12,7 +12,7 @@ Cuando [optas por el modo runas](#how-to-opt-in), las características no-runas 
 
 ## `$state`
 
-Reactive state is declared with the `$state` rune:
+El estado reactivo se declara con la runa `$state`:
 
 ```svelte
 <script>
@@ -24,7 +24,7 @@ Reactive state is declared with the `$state` rune:
 </button>
 ```
 
-You can also use `$state` in class fields (whether public or private):
+También puedes usar `$state` en campos de clases (tanto públicos como privados):
 
 ```js
 // @errors: 7006 2554
@@ -38,9 +38,9 @@ class Todo {
 }
 ```
 
-> In this example, the compiler transforms `done` and `text` into `get`/`set` methods on the class prototype referencing private fields
+> En este ejemplo, el compilador transforma `done` y `text` en métodos `get`/`set` en el prototipo de la clase haciendo referencia a campos privados
 
-Objects and arrays [are made reactive](/#H4sIAAAAAAAAE42QwWrDMBBEf2URhUhUNEl7c21DviPOwZY3jVpZEtIqUBz9e-UUt9BTj7M784bdmZ21wciq48xsPyGr2MF7Jhl9-kXEKxrCoqNLQS2TOqqgPbWd7cgggU3TgCFCAw-RekJ-3Et4lvByEq-drbe_dlsPichZcFYZrT6amQto2pXw5FO88FUYtG90gUfYi3zvWrYL75vxL57zfA07_zfr23k1vjtt-aZ0bQTcbrDL5ZifZcAxKeS8lzDc8X0xDhJ2ItdbX1jlOZMb9VnjyCoKCfMpfwG975NFVwEAAA==):
+Los objetos y arreglos [se hacen reactivos](/#H4sIAAAAAAAAE42QwWrDMBBEf2URhUhUNEl7c21DviPOwZY3jVpZEtIqUBz9e-UUt9BTj7M784bdmZ21wciq48xsPyGr2MF7Jhl9-kXEKxrCoqNLQS2TOqqgPbWd7cgggU3TgCFCAw-RekJ-3Et4lvByEq-drbe_dlsPichZcFYZrT6amQto2pXw5FO88FUYtG90gUfYi3zvWrYL75vxL57zfA07_zfr23k1vjtt-aZ0bQTcbrDL5ZifZcAxKeS8lzDc8X0xDhJ2ItdbX1jlOZMb9VnjyCoKCfMpfwG975NFVwEAAA==):
 
 ```svelte
 <script>
@@ -60,13 +60,13 @@ Objects and arrays [are made reactive](/#H4sIAAAAAAAAE42QwWrDMBBEf2URhUhUNEl7c21
 </p>
 ```
 
-### What this replaces
+### Lo que esto reemplaza
 
-In non-runes mode, a `let` declaration is treated as reactive state if it is updated at some point. Unlike `$state(...)`, which works anywhere in your app, `let` only behaves this way at the top level of a component.
+En el modo sin runas, una declaración `let` se trata como estado reactivo si se actualiza en algún momento. A diferencia de `$state(...)`, que funciona en cualquier lugar de tu aplicación, `let` solo se comporta de esta manera en el nivel superior de un componente.
 
 ## `$state.frozen`
 
-State declared with `$state.frozen` cannot be mutated; it can only be _reassigned_. In other words, rather than assigning to a property of an object, or using an array method like `push`, replace the object or array altogether if you'd like to update it:
+El estado declarado con `$state.frozen` no puede ser mutado; solo puede ser _reasignado_. En otras palabras, en lugar de asignar a una propiedad de un objeto, o usar un método de arreglo como `push`, reemplaza el objeto o arreglo por completo si deseas actualizarlo:
 
 ```diff
 <script>
@@ -89,13 +89,13 @@ State declared with `$state.frozen` cannot be mutated; it can only be _reassigne
 </p>
 ```
 
-This can improve performance with large arrays and objects that you weren't planning to mutate anyway, since it avoids the cost of making them reactive. Note that frozen state can _contain_ reactive state (for example, a frozen array of reactive objects).
+Esto puede mejorar el rendimiento con arreglos y objetos grandes que de todos modos no planeabas mutar, ya que evita el costo de hacerlos reactivos. Ten en cuenta que el estado congelado puede _contener_ estado reactivo (por ejemplo, un arreglo congelado de objetos reactivos).
 
-> Objects and arrays passed to `$state.frozen` will be shallowly frozen using `Object.freeze()`. If you don't want this, pass in a clone of the object or array instead.
+> Los objetos y arreglos pasados a `$state.frozen` serán congelados superficialmente usando `Object.freeze()`. Si no deseas esto, pasa en su lugar una copia del objeto o arreglo.
 
 ## `$derived`
 
-Derived state is declared with the `$derived` rune:
+El estado computado se declara con la runa `$derived`:
 
 ```diff
 <script>
@@ -110,29 +110,29 @@ Derived state is declared with the `$derived` rune:
 +<p>{count} doubled is {doubled}</p>
 ```
 
-The expression inside `$derived(...)` should be free of side-effects. Svelte will disallow state changes (e.g. `count++`) inside derived expressions.
+La expresión dentro de `$derived(...)` debe estar libre de efectos secundarios. Svelte prohibirá cambios de estado (por ejemplo, `count++`) dentro de expresiones derivadas.
 
-As with `$state`, you can mark class fields as `$derived`.
+Al igual que con `$state`, puedes marcar campos de clase como `$derived`.
 
-### What this replaces
+### Lo que esto reemplaza
 
-The non-runes equivalent would be `$: double = count * 2`. There are some important differences to be aware of:
+El equivalente sin runas sería `$: double = count * 2`. Hay algunas diferencias importantes a tener en cuenta:
 
-- With the `$derived` rune, the value of `double` is always current (for example if you update `count` then immediately `console.log(double)`). With `$:` declarations, values are not updated until right before Svelte updates the DOM
-- In non-runes mode, Svelte determines the dependencies of `double` by statically analysing the `count * 2` expression. If you refactor it...
+- Con la runa `$derived`, el valor de `double` siempre está actualizado (por ejemplo, si actualizas `count` y luego haces `console.log(double)`). Con las declaraciones `$:`, los valores no se actualizan hasta justo antes de que Svelte actualice el DOM
+- En modo sin runas, Svelte determina las dependencias de `double` analizando estáticamente la expresión `count * 2`. Si la refactorizas...
   ```js
   // @errors: 2304
   const doubleCount = () => count * 2;
   $: double = doubleCount();
   ```
-  ...that dependency information is lost, and `double` will no longer update when `count` changes. With runes, dependencies are instead tracked at runtime.
-- In non-runes mode, reactive statements are ordered _topologically_, meaning that in a case like this...
+  ...esa información de dependencia se pierde y `double` ya no se actualizará cuando `count` cambie. Con runas, las dependencias se rastrean en tiempo de ejecución.
+- En el modo sin runas, las declaraciones reactivas se ordenan _topológicamente_, lo que significa que en un caso como este...
   ```js
   // @errors: 2304
   $: triple = double + count;
   $: double = count * 2;
   ```
-  ...`double` will be calculated first despite the source order. In runes mode, `triple` cannot reference `double` before it has been declared.
+  ...`double` se calculará primero a pesar del orden en el código. En el modo de runas, `triple` no puede referenciar a `double` antes de que haya sido declarado.
 
 ## `$effect`
 

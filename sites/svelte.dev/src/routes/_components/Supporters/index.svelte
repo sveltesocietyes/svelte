@@ -10,13 +10,13 @@
 </script>
 
 <Section --background="var(--sk-back-2">
-	<p class="intro">Svelte is made possible by the work of hundreds of supporters.</p>
+	<p class="intro">Svelte es posible gracias al trabajo de cientos de colaboradores.</p>
 
 	<div class="layout">
 		<div class="contributors blurb">
-			<h3>contributors</h3>
+			<h3>contribuyentes</h3>
 			<p>
-				<a href="https://github.com/sveltejs/svelte/graphs/contributors">Join us on GitHub</a>
+				<a href="https://github.com/sveltejs/svelte/graphs/contributors">Únete a nosotros en Github</a>
 			</p>
 		</div>
 

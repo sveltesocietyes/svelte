@@ -2,4 +2,7 @@ blank_issues_enabled: false
 contact_links:
   - name: Chat de Discord
     url: https://discord.gg/5qBzk2fv
-    about: Realiza preguntas y debates con otros usuarios de Svelte en tiempo real.
+    about: Realiza preguntas y debates en el canal de Discord de Svelte en español.
+  - name: Chat de Telegram
+    url: https://https://t.me/sveltekit_dev
+    about: Realiza preguntas y debates en el canal de Telegram de Svelte en español

@@ -11,13 +11,13 @@ body:
       label: Descripción de la solicitud
       description: Por favor provee una descripción clara y precisa.
       placeholder: Se require la traducción de....
-      validations:
-        required: true
+    validations:
+      required: true
   - type: input
     id: path
     attributes: 
       label: Ruta del archivo
       description: Establece la ruta hacia el archivo.
       placeholder: github.com/Svelte-Society-Es/...
-      validations: 
-        required: true
+    validations: 
+      required: true

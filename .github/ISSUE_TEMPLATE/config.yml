@@ -1,5 +1,5 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Discord Chat
-    url: https://svelte.dev/chat
-    about: Ask questions and discuss with other Svelte users in real time.
+  - name: Chat de Discord
+    url: https://discord.gg/5qBzk2fv
+    about: Realiza preguntas y debates con otros usuarios de Svelte en tiempo real.

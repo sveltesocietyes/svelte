@@ -1,10 +1,10 @@
 ---
-title: Basic markup
+title: Marcado básico
 ---
 
-## Tags
+## Etiquetas
 
-A lowercase tag, like `<div>`, denotes a regular HTML element. A capitalised tag, such as `<Widget>` or `<Namespace.Widget>`, indicates a _component_.
+Una etiqueta en minúsculas, como `<div>`, denota un elemento HTML normal. Una etiqueta con la primera letra en mayúscula, como `<Widget>` o `<Namespace.Widget>`, indica un _componente_.
 
 ```svelte
 <script>
@@ -16,105 +16,105 @@ A lowercase tag, like `<div>`, denotes a regular HTML element. A capitalised tag
 </div>
 ```
 
-## Attributes and props
+## Atributos y props
 
-By default, attributes work exactly like their HTML counterparts.
+Por defecto, los atributos funcionan exactamente igual que su contraparte HTML.
 
 ```svelte
 <div class="foo">
-	<button disabled>can't touch this</button>
+	<button disabled>No puedo tocar esto</button>
 </div>
 ```
 
-As in HTML, values may be unquoted.
+Como en HTML, los valores pueden no estar entre comillas
 
 <!-- prettier-ignore -->
 ```svelte
 <input type=checkbox />
 ```
 
-Attribute values can contain JavaScript expressions.
+Los valores de los atributos pueden contener expresiones de Javascript.
 
 ```svelte
 <a href="page/{p}">page {p}</a>
 ```
 
-Or they can _be_ JavaScript expressions.
+O pueden _ser_ expresiones Javascript
 
 ```svelte
 <button disabled={!clickable}>...</button>
 ```
 
-Boolean attributes are included on the element if their value is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) and excluded if it's [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy).
+Los atributos booleanos se incluyen en el elemento si su valor es [truthy](https://developer.mozilla.org/es/docs/Glossary/Truthy) y se excluyen si su valor es [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)
 
-All other attributes are included unless their value is [nullish](https://developer.mozilla.org/en-US/docs/Glossary/Nullish) (`null` or `undefined`).
+Todos los demás atributos se incluyen a menos que su valor sea [nulish](https://developer.mozilla.org/en-US/docs/Glossary/Nullish) (`null` o `undefined`).
 
 ```svelte
-<input required={false} placeholder="This input field is not required" />
-<div title={null}>This div has no title attribute</div>
+<input required={false} placeholder="Este input no es obligatorio" />
+<div title={null}>Este div no tiene atributo title</div>
 ```
 
-An expression might include characters that would cause syntax highlighting to fail in regular HTML, so quoting the value is permitted. The quotes do not affect how the value is parsed:
+Una expresión puede incluir caracteres que harían que el resaltado de sintaxis fallara en HTML normal, por lo que se permite citar el valor. Las comillas no afectan a la forma en que se analiza el valor:
 
 <!-- prettier-ignore -->
 ```svelte
 <button disabled="{number !== 42}">...</button>
 ```
 
-When the attribute name and value match (`name={name}`), they can be replaced with `{name}`.
+Cuando el atributo name y su valor coinciden (`name={name}`), pueden ser reemplazados con `{name}`.
 
 ```svelte
 <button {disabled}>...</button>
-<!-- equivalent to
+<!-- equivale a
 <button disabled={disabled}>...</button>
 -->
 ```
 
-By convention, values passed to components are referred to as _properties_ or _props_ rather than _attributes_, which are a feature of the DOM.
+Por convención, los valores pasados a los componentes se denominan _propiedades_ o _props_ en lugar de _atributos_, que son una característica del DOM.
 
-As with elements, `name={name}` can be replaced with the `{name}` shorthand.
+Al igual que con los elementos, `name={name}` se puede reemplazar con la abreviatura `{name}`.
 
 ```svelte
 <Widget foo={bar} answer={42} text="hello" />
 ```
 
-_Spread attributes_ allow many attributes or properties to be passed to an element or component at once.
+Los _atributos de extensión_ permiten pasar muchos atributos o propiedades a un elemento o componente a la vez.
 
-An element or component can have multiple spread attributes, interspersed with regular ones.
+Un elemento o componente, puede tener múltiples atributos de extensión, intercalados coon atributos regulares.
 
 ```svelte
 <Widget {...things} />
 ```
 
-`$$props` references all props that are passed to a component, including ones that are not declared with `export`. Using `$$props` will not perform as well as references to a specific prop because changes to any prop will cause Svelte to recheck all usages of `$$props`. But it can be useful in some cases – for example, when you don't know at compile time what props might be passed to a component.
+`$$props` hace referencia a todas las props que han sido pasadas al componente, includas aquellas no declaradas con `export`. El uso de `$$props` no funcionará tan bien como las referencias a una prop específica, porque los cambios en cualquier propiedad harán que Svelte vuelva a verificar todos los usos de `$$props`. Pero puede ser útil en algunos casos, por ejemplo, cuando no se sabe en tiempo de compilación qué props se pueden pasar a un componente.
 
 ```svelte
 <Widget {...$$props} />
 ```
 
-`$$restProps` contains only the props which are _not_ declared with `export`. It can be used to pass down other unknown attributes to an element in a component. It shares the same performance characteristics compared to specific property access as `$$props`.
+`$$restProps` contiene solo las propiedades que _no_ se declaran con `export`. Puede ser útil para transmitir otros atributos desconocidos a un elemento de un componente. Comparte las mismas características de rendimiento en comparación con el acceso a una propiedad específica que `$$props`.
 
 ```svelte
 <input {...$$restProps} />
 ```
 
-> The `value` attribute of an `input` element or its children `option` elements must not be set with spread attributes when using `bind:group` or `bind:checked`. Svelte needs to be able to see the element's `value` directly in the markup in these cases so that it can link it to the bound variable.
+> El atributo `value` de un elemento `input` o sus elementos secundarios `option` no deben establecerse con atributos spread cuando se utiliza `bind:group` o `bind:checked`. Svelte necesita poder ver el `valor` del elemento directamente en el marcado en estos casos, para que pueda vincularlo a la variable enlazada.
 
-> Sometimes, the attribute order matters as Svelte sets attributes sequentially in JavaScript. For example, `<input type="range" min="0" max="1" value={0.5} step="0.1"/>`, Svelte will attempt to set the value to `1` (rounding up from 0.5 as the step by default is 1), and then set the step to `0.1`. To fix this, change it to `<input type="range" min="0" max="1" step="0.1" value={0.5}/>`.
+> A veces, el orden de los atributos es importante, ya que Svelte establece los atributos secuencialmente en JavaScript. Por ejemplo, `<input type="range" min="0" max="1" value={0.5} step="0.1"/>`, Svelte intentará establecer a `value` en `1` (redondeando hacia arriba desde 0.5 ya que el step por defecto es 1), y luego establecerá el step en `0.1`. Para solucionar esto, cámbielo a `<input type="range" min="0" max="1" step="0.1" value={0.5}/>`.
 
-> Another example is `<img src="..." loading="lazy" />`. Svelte will set the img `src` before making the img element `loading="lazy"`, which is probably too late. Change this to `<img loading="lazy" src="...">` to make the image lazily loaded.
+> Otro ejemplo es `<img src="..." loading="lazy" />`. Svelte establecerá el img `src` antes de hacer el elemento img `loading="lazy"`, lo que probablemente sea demasiado tarde. Cambie esto a `<img loading="lazy" src="...">` para que la imagen se cargue de forma diferida.
 
-## Text expressions
+## Expresiones de texto
 
-A JavaScript expression can be included as text by surrounding it with curly braces.
+Una expresión de Javascript puede ser incluida cómo texto encerrándola entre llaves.
 
 ```svelte
 {expression}
 ```
 
-Curly braces can be included in a Svelte template by using their [HTML entity](https://developer.mozilla.org/docs/Glossary/Entity) strings: `&lbrace;`, `&lcub;`, or `&#123;` for `{` and `&rbrace;`, `&rcub;`, or `&#125;` for `}`.
+Las llaves se pueden incluir en una plantilla de Svelte utilizando sus strings [entidad HTML](https://developer.mozilla.org/docs/Glossary/Entity): `&lbrace;`, `&lcub;` o `&#123` para `{` y `&rbrace;`, `&rcub;`, o `&#125` para `}`.
 
-> If you're using a regular expression (`RegExp`) [literal notation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp#literal_notation_and_constructor), you'll need to wrap it in parentheses.
+> Si está utilizando una expresión regular (`RegExp`) [notación literal](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/RegExp#notaci%C3%B3n_literal_y_constructor), necesitará encerrarla entre paréntesis.
 
 <!-- prettier-ignore -->
 ```svelte
@@ -124,15 +124,15 @@ Curly braces can be included in a Svelte template by using their [HTML entity](h
 <div>{(/^[A-Za-z ]+$/).test(value) ? x : y}</div>
 ```
 
-## Comments
+## Commentarios
 
-You can use HTML comments inside components.
+Puede utilizar comentarios dentro de un componente.
 
 ```svelte
-<!-- this is a comment! --><h1>Hello world</h1>
+<!-- ¡Este es un comentario! --><h1>Hello world</h1>
 ```
 
-Comments beginning with `svelte-ignore` disable warnings for the next block of markup. Usually, these are accessibility warnings; make sure that you're disabling them for a good reason.
+Los comentarios que comiencen con `svelte-ignore` desabilitarán las advertencias para el siguiente bloque en el marcado. Usualmente son advertencias de accesibilidad; asegúrese de deshabilitarlas por una buena razón.
 
 ```svelte
 <!-- svelte-ignore a11y-autofocus -->

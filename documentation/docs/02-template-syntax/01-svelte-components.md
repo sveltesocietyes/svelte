@@ -92,7 +92,7 @@ Las expresiones de actualización (`count += 1`) y las asignaciones de propiedad
 	let count = 0;
 
 	function handleClick() {
-		// LLamar a esta función activará una
+		// Ejecutar esta función activará una
 		// actualización si el marcado hace referencia a `count`
 		count = count + 1;
 	}

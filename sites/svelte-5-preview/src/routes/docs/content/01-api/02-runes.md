@@ -40,7 +40,7 @@ class Todo {
 
 > En este ejemplo, el compilador transforma `done` y `text` en métodos `get`/`set` en el prototipo de la clase haciendo referencia a campos privados
 
-Los objetos y arreglos [se hacen reactivos](/#H4sIAAAAAAAAE42QwWrDMBBEf2URhUhUNEl7c21DviPOwZY3jVpZEtIqUBz9e-UUt9BTj7M784bdmZ21wciq48xsPyGr2MF7Jhl9-kXEKxrCoqNLQS2TOqqgPbWd7cgggU3TgCFCAw-RekJ-3Et4lvByEq-drbe_dlsPichZcFYZrT6amQto2pXw5FO88FUYtG90gUfYi3zvWrYL75vxL57zfA07_zfr23k1vjtt-aZ0bQTcbrDL5ZifZcAxKeS8lzDc8X0xDhJ2ItdbX1jlOZMb9VnjyCoKCfMpfwG975NFVwEAAA==):
+Los objetos y arreglos [se hacen profundamente reactivos](/#H4sIAAAAAAAAE42QwWrDMBBEf2URhUhUNEl7c21DviPOwZY3jVpZEtIqUBz9e-UUt9BTj7M784bdmZ21wciq48xsPyGr2MF7Jhl9-kXEKxrCoqNLQS2TOqqgPbWd7cgggU3TgCFCAw-RekJ-3Et4lvByEq-drbe_dlsPichZcFYZrT6amQto2pXw5FO88FUYtG90gUfYi3zvWrYL75vxL57zfA07_zfr23k1vjtt-aZ0bQTcbrDL5ZifZcAxKeS8lzDc8X0xDhJ2ItdbX1jlOZMb9VnjyCoKCfMpfwG975NFVwEAAA==):
 
 ```svelte
 <script>
@@ -116,7 +116,7 @@ Al igual que con `$state`, puedes marcar campos de clase como `$derived`.
 
 ### Lo que esto reemplaza
 
-El equivalente sin runas sería `$: double = count * 2`. Hay algunas diferencias importantes a tener en cuenta:
+Si el valor de una variable reactiva se está calculando, debería ser reemplazado por $derived, ya sea que anteriormente tomara la forma de $: double = count * 2 o $: { double = count * 2; }. Hay algunas diferencias importantes que debes tener en cuenta:
 
 - Con la runa `$derived`, el valor de `double` siempre está actualizado (por ejemplo, si actualizas `count` y luego haces `console.log(double)`). Con las declaraciones `$:`, los valores no se actualizan hasta justo antes de que Svelte actualice el DOM
 - En modo sin runas, Svelte determina las dependencias de `double` analizando estáticamente la expresión `count * 2`. Si la refactorizas...
@@ -134,9 +134,32 @@ El equivalente sin runas sería `$: double = count * 2`. Hay algunas diferencias
   ```
   ...`double` se calculará primero a pesar del orden en el código. En el modo de runas, `triple` no puede referenciar a `double` antes de que haya sido declarado.
 
+## `$derived.call`
+
+Sometimes you need to create complex derivations that don't fit inside a short expression. In these cases, you can use `$derived.call` which accepts a function as its argument.
+
+```svelte
+<script>
+	let numbers = $state([1, 2, 3]);
+	let total = $derived.call(() => {
+		let total = 0;
+		for (const n of numbers) {
+			total += n;
+		}
+		return total;
+	});
+</script>
+
+<button on:click={() => numbers.push(numbers.length + 1)}>
+	{numbers.join(' + ')} = {total}
+</button>
+```
+
+In essence, `$derived(expression)` is equivalent to `$derived.call(() => expression)`.
+
 ## `$effect`
 
-To run code whenever specific values change, or when a component is mounted to the DOM, we can use the `$effect` rune:
+To run side-effects like logging or analytics whenever some specific values change, or when a component is mounted to the DOM, we can use the `$effect` rune:
 
 ```diff
 <script>
@@ -167,13 +190,13 @@ To run code whenever specific values change, or when a component is mounted to t
 
 ### What this replaces
 
-The `$effect` rune is roughly equivalent to `$:` when it's being used for side-effects (as opposed to declarations). There are some important differences:
+The portions of `$: {}` that are triggering side-effects can be replaced with `$effect` while being careful to migrate updates of reactive variables to use `$derived`. There are some important differences:
 
 - Effects only run in the browser, not during server-side rendering
 - They run after the DOM has been updated, whereas `$:` statements run immediately _before_
 - You can return a cleanup function that will be called whenever the effect refires
 
-Additionally, you will most likely find you can use effects in all the places where you previously used `onMount` and `afterUpdate` (the latter of which will be deprecated in Svelte 5).
+Additionally, you may prefer to use effects in some places where you previously used `onMount` and `afterUpdate` (the latter of which will be deprecated in Svelte 5). There are some differences between these APIs as `$effect` should not be used to compute reactive values and will be triggered each time a referenced reactive variable changes (unless using `untrack`).
 
 ## `$effect.pre`
 
